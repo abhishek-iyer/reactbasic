@@ -1,38 +1,71 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navigation-menu {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  background-color: #f2f2f2;
+  padding: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.logo img {
+  height: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-menu ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-menu li {
+  cursor: pointer;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown li {
+  padding: 10px;
+}
+
+.dropdown-parent:hover .dropdown {
+  display: block;
+}
+
+.user-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown-parent span {
+  display: inline-block;
+  padding: 10px;
+}
+
+.username {
+  padding: 10px;
+}
+
+.username:hover + .dropdown {
+  display: block;
+}
+
+.dropdown-parent:hover .dropdown,
+.username:hover + .dropdown {
+  display: block;
+}
+
+.main-dropdown {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  flex-direction: column;
 }
