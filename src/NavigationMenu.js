@@ -2,17 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 
 const NavigationMenu = () => {
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   const aboutDropdownRef = useRef(null);
-  const userDropdownRef = useRef(null);
 
   const toggleAboutDropdown = () => {
     setIsAboutDropdownOpen(!isAboutDropdownOpen);
-  };
-
-  const toggleUserDropdown = () => {
-    setIsUserDropdownOpen(!isUserDropdownOpen);
   };
 
   const handleClickOutside = (event) => {
@@ -21,14 +15,6 @@ const NavigationMenu = () => {
       !aboutDropdownRef.current.contains(event.target)
     ) {
       setIsAboutDropdownOpen(false);
-    }
-
-    if (
-      userDropdownRef.current &&
-      !userDropdownRef.current.contains(event.target) &&
-      !event.target.classList.contains("username")
-    ) {
-      setIsUserDropdownOpen(false);
     }
   };
 
@@ -43,7 +29,7 @@ const NavigationMenu = () => {
   return (
     <div className="navigation-menu">
       <div className="logo">
-        <img src="/path/to/logo.png" alt="Logo" />
+        <img src="../images/logo.jpg" alt="Logo" />
       </div>
       <nav className="nav-menu">
         <ul>
@@ -67,22 +53,6 @@ const NavigationMenu = () => {
           <li>Contact</li>
         </ul>
       </nav>
-      <div className="user-menu">
-        <div
-          className={`username ${isUserDropdownOpen ? "open" : ""}`}
-          onClick={toggleUserDropdown}
-          ref={userDropdownRef}
-        >
-          User Name
-        </div>
-        {isUserDropdownOpen && (
-          <ul className="dropdown">
-            <li>Profile</li>
-            <li>Settings</li>
-            <li>Logout</li>
-          </ul>
-        )}
-      </div>
     </div>
   );
 };
