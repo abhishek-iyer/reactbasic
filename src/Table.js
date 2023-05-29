@@ -16,6 +16,7 @@ const Table = () => {
   const [formErrors, setFormErrors] = useState({});
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [notification, setNotification] = useState(null);
 
   useEffect(() => {
     const savedData = localStorage.getItem("tableData");
@@ -85,6 +86,13 @@ const Table = () => {
     });
   };
 
+  const showNotification = (message) => {
+    setNotification(message);
+    setTimeout(() => {
+      setNotification(null);
+    }, 3000);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -120,7 +128,11 @@ const Table = () => {
     setData((prevData) => [...prevData, newData]);
 
     handleCloseModal();
+
+    // Show success notification
+    showNotification("Data added successfully!");
   };
+
   const isValidAge = (age) => {
     return !isNaN(age);
   };
@@ -132,6 +144,7 @@ const Table = () => {
 
   return (
     <div>
+      {notification && <div className="notification">{notification}</div>}
       {isOpen && (
         <div className="modal">
           <div className="background-opacity"></div>

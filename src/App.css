@@ -337,3 +337,13 @@ button.add-entry {
   cursor: pointer;
   border-radius: 5px;
 }
+
+.notification {
+  position: absolute;
+  background-color: #36517b;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  right: 12px;
+  top: 15px;
+}
