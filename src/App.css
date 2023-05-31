@@ -103,7 +103,6 @@
   background-color: #f2f2f2;
   padding: 10px;
   border-radius: 4px;
-  width: fit-content;
 }
 
 .pagination li {
@@ -134,15 +133,6 @@
 .pagination li.active {
   background-color: blue;
   color: #ffffff;
-}
-
-.custom-select {
-  position: relative;
-  margin-bottom: 30px;
-  display: inline-block;
-  margin-top: 30px;
-  margin-left: 10px;
-  float: left;
 }
 
 .select-header {
@@ -346,4 +336,27 @@ button.add-entry {
   border-radius: 5px;
   right: 12px;
   top: 15px;
+}
+
+.collapsible-drop {
+  width: auto;
+  margin-bottom: 20px;
+}
+.collapsible-button {
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid #333;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
+}
+
+.content {
+  padding: 10px;
+  background-color: #e6e6e6;
+}
+
+button.collapsible-button svg {
+  float: right;
 }

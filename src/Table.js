@@ -129,7 +129,6 @@ const Table = () => {
 
     handleCloseModal();
 
-    // Show success notification
     showNotification("Data added successfully!");
   };
 
