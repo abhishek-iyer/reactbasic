@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Pagination from "./Pagination";
+import DetailsPage from "./DetailsPage";
+import "./table.css";
 
 const Table = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -17,6 +20,7 @@ const Table = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [notification, setNotification] = useState(null);
+  const [detailsPageData, setDetailsPageData] = useState(null);
 
   useEffect(() => {
     const savedData = localStorage.getItem("tableData");
@@ -141,8 +145,12 @@ const Table = () => {
     return emailRegex.test(email);
   };
 
+  const handleLinkClick = (item) => {
+    setDetailsPageData(item);
+  };
+
   return (
-    <div>
+    <div className="table-scenario">
       {notification && <div className="notification">{notification}</div>}
       {isOpen && (
         <div className="modal">
@@ -220,6 +228,7 @@ const Table = () => {
           </div>
         </div>
       )}
+
       <div className="search-wrapper">
         <button onClick={handleOpenModal} className="add-entry">
           Add Entry
@@ -232,36 +241,59 @@ const Table = () => {
           className="search"
         />
       </div>
-      <table className="main-table">
-        <thead>
-          {data.length > 0 && (
-            <tr>
-              {Object.keys(data[0]).map((key) => (
-                <th key={key}>
-                  {key === "age" ? (
-                    <button onClick={toggleSortOrder}>
-                      {key} {sortOrder === "asc" ? "▲" : "▼"}
-                    </button>
-                  ) : (
-                    key
-                  )}
-                </th>
-              ))}
-            </tr>
-          )}
-        </thead>
 
-        <tbody>
-          {currentItems.map((item, index) => (
-            <tr key={index}>
-              <td>{item.name}</td>
-              <td>{item.age}</td>
-              <td>{item.email}</td>
-              <td>{item.priority}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Router>
+        <Routes>
+          <Route
+            path="/DetailsPage/:itemName"
+            element={<DetailsPage data={detailsPageData} />}
+          />
+        </Routes>
+
+        <table className="main-table">
+          <thead>
+            {data.length > 0 && (
+              <tr>
+                {Object.keys(data[0]).map((key) => (
+                  <th key={key}>
+                    {key === "age" ? (
+                      <button onClick={toggleSortOrder}>
+                        {key} {sortOrder === "asc" ? "▲" : "▼"}
+                      </button>
+                    ) : (
+                      key
+                    )}
+                  </th>
+                ))}
+              </tr>
+            )}
+          </thead>
+          <tbody>
+            {isLoading ? (
+              <tr>
+                <td>Loading...</td>
+              </tr>
+            ) : (
+              currentItems.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    {" "}
+                    <Link
+                      to={`/DetailsPage/${item.name}`}
+                      onClick={() => handleLinkClick(item)}
+                    >
+                      {item.name}
+                    </Link>
+                  </td>
+                  <td>{item.age}</td>
+                  <td>{item.email}</td>
+                  <td>{item.priority}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </Router>
 
       <Pagination
         itemsPerPage={itemsPerPage}
