@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Pagination from "./Pagination";
-import DetailsPage from "./DetailsPage";
+import DetailsPageclass from "./DetailsPageclass";
 import "./table.css";
 
 const Table = () => {
@@ -245,8 +245,8 @@ const Table = () => {
       <Router>
         <Routes>
           <Route
-            path="/DetailsPage/:itemName"
-            element={<DetailsPage data={detailsPageData} />}
+            path="/DetailsPageclass/:itemName"
+            element={<DetailsPageclass data={detailsPageData} />}
           />
         </Routes>
 
@@ -279,7 +279,7 @@ const Table = () => {
                   <td>
                     {" "}
                     <Link
-                      to={`/DetailsPage/${item.name}`}
+                      to={`/DetailsPageclass/${item.name}`}
                       onClick={() => handleLinkClick(item)}
                     >
                       {item.name}
