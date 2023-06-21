@@ -73,40 +73,44 @@ const UserTable = ({ users, currentPage, totalPages, handlePageChange }) => {
         )}
       </div>
       <div className="table-container">
-        <table className="import-table">
-          <thead>
-            <tr>
-              {Object.keys(users[0]).map((key) => (
-                <th key={key}>{key}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.id}>
-                {Object.values(user).map((value, index) => (
-                  <td key={index}>
-                    {typeof value === "object" && !Array.isArray(value) ? (
-                      <>
-                        {Object.values(value).map(
-                          (nestedValue, nestedIndex) => (
-                            <span key={nestedIndex}>
-                              {typeof nestedValue === "object"
-                                ? Object.values(nestedValue).join(", ")
-                                : nestedValue}
-                            </span>
-                          )
-                        )}
-                      </>
-                    ) : (
-                      value
-                    )}
-                  </td>
+        {users.length === 0 ? (
+          <p>No students found.</p>
+        ) : (
+          <table className="import-table">
+            <thead>
+              <tr>
+                {Object.keys(users[0]).map((key) => (
+                  <th key={key}>{key}</th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user.id}>
+                  {Object.values(user).map((value, index) => (
+                    <td key={index}>
+                      {typeof value === "object" && !Array.isArray(value) ? (
+                        <>
+                          {Object.values(value).map(
+                            (nestedValue, nestedIndex) => (
+                              <span key={nestedIndex}>
+                                {typeof nestedValue === "object"
+                                  ? Object.values(nestedValue).join(", ")
+                                  : nestedValue}
+                              </span>
+                            )
+                          )}
+                        </>
+                      ) : (
+                        value
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </>
   );
